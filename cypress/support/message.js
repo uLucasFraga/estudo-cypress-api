@@ -1,0 +1,1 @@
+Cypress.message.add('registerSucess')

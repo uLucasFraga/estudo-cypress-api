@@ -14,15 +14,13 @@ Cypress.Commands.add('postUser', (_url, nome, email, password, administrador) =>
   })
 
 Cypress.Commands.add('getUser', (nome, email, _id) => {
+  const params = Cypress._.pick({ nome, email, _id }, Cypress._.identity);
+
     cy.request({
       method: 'GET',
       url: '/usuarios',
       headers: { 'content-type': 'application/json'},
-      // qs: {
-      //   nome: nome,
-      //   email: email,
-      //   _id: _id
-      // },
+      qs: params,
       failOnStatusCode: false
     })
 

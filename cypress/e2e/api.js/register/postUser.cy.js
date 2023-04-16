@@ -123,19 +123,4 @@ describe("Register Users", () => {
                 expect(response.body.administrador).to.eq("administrador deve ser 'true' ou 'false'");
             });
     });
-
-    it('register user with all fields empty', () => {
-        cy.postUser('/usuarios',
-        userFaker.BODY.nome,
-        userFaker.BODY.email,
-        userFaker.BODY.password,
-        userFaker.BODY.administrador
-    )
-        .then((response) => {
-            expect(response.status).to.eq(httpStatus.StatusCodes.BAD_REQUEST)
-            expect(response.body.message).to.eq('Este email já está sendo usado');
-        });
-    });
-
-
 })

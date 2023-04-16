@@ -26,7 +26,7 @@ describe("Get Users", () => {
         });
     });
 
-    it.only('Listing Registered Users for name', () => {
+    it('Listing Registered Users for name', () => {
       cy.getUser(
         dataUsers.nome)
         .then((response) => {
@@ -108,16 +108,5 @@ describe("Get Users", () => {
         expect(response.body.usuarios._id).to.eq(undefined)
       });
   });
-
-  //   it('Listing users with a valid parameter and an incorrect parameter', () => {
-  //     cy.getUser('/usuarios',
-  //     dataUsers.nome,
-  //     dataUsers.email)
-  //     .then((response) => {
-  //       expect(response.status).to.eq(httpStatus.StatusCodes.OK)
-  //       expect(response.body.quantidade).to.eq(0)
-  //       expect(response.body.usuarios).to.empty
-  //     });
-  // });
 
 })

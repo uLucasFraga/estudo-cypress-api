@@ -48,7 +48,7 @@ $ git clone https://github.com/LucasFelice/estudo-cypress-api.git
 > exemplo:
 
 ```js
-// $ cd ./desafio-disys && npm ci 
+// $ cd ./cypress-api && npm ci 
 ```
 
 

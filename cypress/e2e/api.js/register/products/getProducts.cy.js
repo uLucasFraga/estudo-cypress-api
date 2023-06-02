@@ -1,7 +1,6 @@
 /// <reference types="cypress" />
 import { faker } from "@faker-js/faker";
 import dataProducts from '../../../../fixtures/product.json'
-const httpStatus = require('http-status-codes')
 
 const productFaker = {
     BODY: {
@@ -12,6 +11,8 @@ const productFaker = {
         _id: faker.datatype.array
     }    
 }
+
+const httpStatus = require('http-status-codes')
 
 describe ("Get Products", () =>{
 
@@ -91,7 +92,7 @@ describe ("Get Products", () =>{
             expect(response.body.produtos[0].nome).to.eq(dataProducts.produtos[0].nome)
             expect(response.body.produtos[0].preco).to.eq(dataProducts.produtos[0].preco)
             expect(response.body.produtos[0].descricao).to.eq(dataProducts.produtos[0].descricao)
-            // expect(response.body.produtos[0].quantidade).to.eq(dataProducts.produtos[0].quantidade)
+            expect(response.body.produtos[0].quantidade).to.eq(dataProducts.produtos[0].quantidade)
             expect(response.body.produtos[0]._id).to.eq(dataProducts.produtos[0]._id)
           });
       }); 
@@ -106,7 +107,7 @@ describe ("Get Products", () =>{
           });
       });
 
-      it.only('Listing Products with a valid parameter and an invalid parameter', () => {
+      it('Listing Products with a valid parameter and an invalid parameter', () => {
         cy.getProducts(
           productFaker.BODY.nome,
           dataProducts._id

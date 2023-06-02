@@ -1,3 +1,20 @@
+const httpStatus = require('http-status-codes')
+
+// >>>>>> LOGIN <<<<<<
+
+Cypress.Commands.add('loginUser', (_url, email, password) =>{
+  cy.request({
+    method: 'POST',
+    url: `${_url}`,
+    headers: { 'content-type': 'application/json' },
+    body: {
+      email: email,
+      password: password
+    },
+    failOnStatusCode: false
+  })
+})
+
 // >>>>>> USER <<<<<<
 
 Cypress.Commands.add('postUser', (_url, nome, email, password, administrador) => {
@@ -10,19 +27,6 @@ Cypress.Commands.add('postUser', (_url, nome, email, password, administrador) =>
         email: email,
         password: password,
         administrador: administrador
-      },
-      failOnStatusCode: false
-    })
-  })
-
-Cypress.Commands.add('loginUser', (_url, email, password) =>{
-    cy.request({
-      method: 'POST',
-      url: `${_url}`,
-      headers: { 'content-type': 'application/json' },
-      body: {
-        email: email,
-        password: password
       },
       failOnStatusCode: false
     })
@@ -63,38 +67,6 @@ Cypress.Commands.add('putUser', (_id, nome, email, password, administrador) =>{
         failOnStatusCode: false
       })
 })
-// Cypress.Commands.add('getToken', (_url, user, password) => {
-//     cy.request({
-//       method: 'POST',
-//       url: `${_url}`,
-//       headers: { 'content-type': 'application/json' },
-//       body: {
-//         email: user,
-//         senha: password
-//       },
-//       failOnStatusCode: false
-//         }).its('body.token').should('not.be.empty')
-//         .then(token =>{
-//           return token
-//       })
-//   })
-  // Cypress.Commands.add('getIDUser', (_url, nome, email, password, administrador) =>{
-  //   cy.request({
-  //     method: 'POST',
-  //     url: `${url}`,
-  //     headers: { 'content-type': 'application/json' },
-  //     body: {
-  //       nome: nome,
-  //       email: email,
-  //       password: password,
-  //       administrador: administrador
-  //     },
-  //     failOnStatusCode: false
-  //   }).its('body.IDUser').should('not.be.empty')
-  //     .then(IDUser =>{
-  //       return IDUser
-  //     })
-  // })
 
   // >>>>>> PRODUCTS <<<<<<
 
@@ -109,3 +81,35 @@ Cypress.Commands.add('putUser', (_id, nome, email, password, administrador) =>{
       failOnStatusCode: false
     })
   })
+
+//   Cypress.Commands.add('getToken', (email = Cypress.env('email'), password = Cypress.env('password')) => {
+//     cy.loginUser('/login',
+//         email,
+//         password)
+//       .then((response) => {
+//       expect(response.status).to.eq(httpStatus.StatusCodes.OK)
+//       expect(response.body.message).to.eq('Login realizado com sucesso')
+//       expect(response.body.authorization).to.exist
+//       Cypress.env('token', response.body.authorization)
+//     })
+// })
+
+
+  Cypress.Commands.add('postProducts', (nome, preco, descricao, quantidade, token) => {
+    cy.request({
+      method: 'POST',
+      url: '/produtos',
+      headers: { 
+        'content-type': 'application/json',
+        Authorization: `${token}`
+      },
+      body: {
+        nome: nome,
+        preco: preco,
+        descricao: descricao,
+        quantidade: quantidade
+      },
+      failOnStatusCode: false
+    })
+  }) 
+  

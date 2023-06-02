@@ -8,7 +8,6 @@ const userFaker = {
     nome: faker.name.firstName(),
     email: faker.internet.email(),
     password: faker.internet.password(),
-    administrador: faker.datatype.boolean().toString(),
   },
 };
 

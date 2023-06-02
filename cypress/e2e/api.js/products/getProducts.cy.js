@@ -17,7 +17,7 @@ describe("Get Products", () => {
   let qtd;
 
   it("Listing Registered Products", () => {
-    cy.searchProducts("/produtos").then((response) => {
+    cy.searchProducts().then((response) => {
       qtd = response.body.quantidade;
       expect(response.status).to.eq(httpStatus.StatusCodes.OK);
       expect(response.body.quantidade).to.eq(qtd);
